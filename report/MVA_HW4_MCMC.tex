@@ -203,18 +203,18 @@
 	\end{eqnarray*}
 	
 	1.  In figure ~\ref{nrwHM}, we see how the sequence $X^n_1$ varies too much and takes a long time to converge to the mean which is $0$ in this case. The second plot shows that the acceptance ratio also converges , slowly though, up to around $70\%$. So there is room to do better.
-	\begin{figure}
+	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=.5]{nrwHM}
+		\includegraphics[scale=.5]{figures/nrwHM}
 		\caption{The naive symmetric random walk Hastings-Metropolis chain}
 		\label{nrwHM}
 	\end{figure}
 	~\\
 	
 	2.  In figure ~\ref{arwHM}, we see that the sequence $X_n$ converges abruptly to the mean after $n0$. The second plot shows that the acceptance ratio also converges rapidly up to around $100\%$. Further, we can see that the suboptimality factor depend on $n$ in $2$ ways. First, it varies a lot and stays strictly over $1$ (the optimal case). In the second phase, it starts decreasing very slowly to $1$.
-	\begin{figure}
+	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=.5]{arwHM}
+		\includegraphics[scale=.5]{figures/arwHM}
 		\caption{The adaptive symmetric random walk Hastings-Metropolis chain}
 		\label{arwHM}
 	\end{figure}
