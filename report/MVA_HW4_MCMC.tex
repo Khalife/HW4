@@ -40,7 +40,7 @@
 \usepackage{graphicx}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{amsmath}
+\usepackage{amsmath, amssymb}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{float}
@@ -236,11 +236,31 @@
 	
 	1. The equality is trivial: we just have to set $\vartheta=\theta$.\\
 	
-	The fact that $g(\vartheta)$ is always positive means that, to prove the equality $$ Q_{\gamma}(\vartheta,\theta)\geq (f+g)(\vartheta)$$, we just need to prove that:
+	To prove the equality $$ Q_{\gamma}(\vartheta,\theta)\geq (f+g)(\vartheta)$$, we just need to prove that:
 	
-	$$f(\vartheta)\leq f(\theta)+<\nabla f(\theta),\vartheta-\theta>+\frac{1}{2\gamma}\vert\vert \vartheta-\theta\vert\vert^2$$
+	$$\forall \vartheta , \theta \in \Theta \quad f(\vartheta)\leq f(\theta)+<\nabla f(\theta),\vartheta-\theta>+\frac{1}{2\gamma}\vert\vert \vartheta-\theta\vert\vert^2$$
 	
-	~\\
+	Set $ \vartheta , \theta \in \Theta$. Let's take $t \in [0,1]$, we define:
+	
+	\begin{equation}
+	F(t) \triangleq f(\vartheta_t)-f(\theta)-<\nabla f(\theta),\vartheta_t-\theta>-\frac{1}{2\gamma}\vert\vert \vartheta_t-\theta\vert\vert^2
+	\end{equation}
+	
+	where $\vartheta_t=t \vartheta+(1-t)\theta$. Since, $\frac{d}{dt}\vartheta_t=\vartheta-\theta$, $F$ is differentiable and:
+	
+	\begin{eqnarray*}
+		\frac{d}{dt}F(t)&=& <\nabla f(\vartheta), \vartheta-\theta> - <\nabla f(\theta), \vartheta-\theta>-\frac{1}{\gamma}\vert\vert \vartheta-\theta\vert\vert^2\\
+							&=& <\nabla f(\vartheta)- \nabla f(\theta), \vartheta-\theta> -\frac{1}{\gamma}\vert\vert \vartheta-\theta\vert\vert^2\\
+							&\leq& \vert\vert  \nabla f(\vartheta)- \nabla f(\theta)\vert \vert . \vert \vert \vartheta-\theta\vert \vert -\vert\vert \vartheta-\theta\vert\vert^2\\
+							&\leq& (L-\frac{1}{\gamma})\vert\vert \vartheta-\theta\vert\vert^2\\
+							&\leq& 0
+	\end{eqnarray*}
+	
+	The first inequality is the result of Cauchy-Schwartz inequality while the second one is due to the Lipschitz nature of the gradient. The third inequality comes from the fact that $0<\gamma\leq \frac{1}{L}$.\\
+	This means that $F$ in decreasing in $[0,1]$, so:$F(0)\geq F(1)$:
+	$$F(0)=0$$
+	and :
+	$$F(1)=f(\vartheta)- f(\theta)-<\nabla f(\theta),\vartheta-\theta>-\frac{1}{2\gamma}\vert\vert \vartheta-\theta\vert\vert^2$$
 	
 	2. Let $n \in \mathbb{N}$:
 	
@@ -249,9 +269,69 @@
 								&\geq& Q_{\gamma_{n+1}}(\theta_{n+1},\theta_{n})\\ 
 								&\geq& (f+g)(\theta_{n+1})
 	\end{eqnarray*}
-	The first inequality is the result of the definition $\theta_{n+1}$. The second comes from the first question.\\
+	The first inequality is the result of the definition of $\theta_{n+1}$. The second one comes from the first question.\\
 	
-	3. 
+	3. Set $ \vartheta , \theta \in \Theta$. we develop: 
+	
+	\begin{eqnarray*}
+		\frac{1}{2\gamma}\vert\vert \vartheta - \theta -\gamma \nabla f(\theta) \vert\vert^2&=&\frac{1}{2\gamma}\vert\vert \vartheta - \theta \vert \vert ^2 - <\vartheta - \theta ,\nabla f(\theta)>+\frac{\gamma}{2} \vert\vert \nabla f(\theta)\vert\vert^2
+	\end{eqnarray*}
+	
+	This means that :
+	
+	$$Q_{\gamma}(\vartheta,\theta)= g(\vartheta)+f(\theta)+ 	\frac{1}{2\gamma}\vert\vert \vartheta - \theta -\gamma \nabla f(\theta) \vert\vert^2-\frac{\gamma}{2} \vert\vert \nabla f(\theta)\vert\vert^2$$
+	
+	4. Taking off the constants w.r.t to $\vartheta$, we get:
+	
+	\begin{eqnarray*}
+		\theta_{n+1}&=& \text{arg min}_{\vartheta \in \Theta} Q_{\gamma_{n+1}} (\vartheta,\theta_n)\\
+							&=& \text{arg min}_{\vartheta \in \Theta} g(\vartheta)+\frac{1}{2\gamma_{n+1}}\vert\vert \vartheta - \theta_n -\gamma_{n+1} \nabla f(\theta_n) \vert\vert^2\\
+							&=& \text{arg min}_{\vartheta \in \Theta} \sum_{i=1,\dots,d} \lambda \vert \vartheta_i \vert 
+							 + \frac{1}{2\gamma_{n+1}}( \vartheta_i -( \theta_n)_i - \gamma_{n+1}( \nabla f(\theta_n))_i )^2
+	\end{eqnarray*}
+	
+	So we can just minimize on each direction independently:
+	
+	$$(\theta_{n+1})_i= \text{arg min}_{\vartheta_i} \lambda \vert \vartheta_i \vert+ \frac{1}{2\gamma_{n+1}}( \vartheta_i - ( \theta_n)_i -\gamma_{n+1}( \nabla f(\theta_n))_i )^2$$
+	
+	We set : $u= \theta_n-\gamma_{n+1}\nabla f(\theta_n)$. We rewrite the last equation as:
+	$$(\theta_{n+1})_i= \text{arg min}_{\vartheta_i} \lambda \vert \vartheta_i \vert + \frac{1}{2 \gamma_{n+1}}( \vartheta_i - u_i)^2$$
+	
+	So we consider the function:
+	$$L^{\gamma}_u(x)\triangleq \lambda \vert x \vert+ \frac{1}{2 \gamma}( x - u)^2$$
+	
+	It is obvious that :
+	
+	$$L^{\gamma}_u(x) = L^{\gamma}_{-u}(x)$$
+	
+	So $L$ is symmetric w.r.t. $u$. It means that we can just focus on the case where: $u \in \mathbb{R}_+$:
+	
+	\begin{itemize}
+		\item $L^{\gamma}_u$ is decreasing in $ \mathbb{R}_- $ from $+\infty$ to $\frac{1}{2 \gamma}u^2$, because:
+		$$\forall x \in \mathbb{R}_- \quad L^{\gamma}_u(x)=-\lambda x + \frac{1}{2 \gamma}( x - u)^2$$
+		\item  Since: 
+		$$\forall x \in \mathbb{R}_+ \quad \frac{d}{dx}L^{\gamma}_u(x)=\lambda + \frac{1}{\gamma} (x-u)$$
+		Two cases present themselves:
+		\begin{itemize}
+			\item [1. ] Either $u-\gamma \lambda \geq 0 $ and then  $L^{\gamma}_u$ decreases in $ [0,u-\gamma \lambda]$ from $\frac{1}{2 \gamma}u^2$ to $\lambda u -\frac{\lambda^2 \gamma}{2} $ and then starts increasing in $[u-\gamma \lambda,+\infty)$ from $\lambda u -\frac{\lambda^2 \gamma}{2} $ to $+\infty$.
+			
+			\item[2. ] Or $u-\gamma \lambda < 0 $, which means that $L^{\gamma}_u$ increases in $\mathbb{R}_+$ from $\frac{1}{2 \gamma}u^2$ to $+\infty$
+		\end{itemize}
+	\end{itemize}
+	
+	We make use of the symmetry of $L$ w.r.t. $u$ and we summuries the previous discussion: 
+	
+	$$\text{arg min }L^{\gamma}_u(x)=
+	\begin{cases}
+	u-\gamma \lambda \quad \text{, if } u\geq \gamma \lambda \\
+	0 \quad \text{, if } u \in (-\lambda \gamma,\gamma \lambda)\\
+	u+\gamma \lambda \quad \text{, if} u\leq -\gamma \lambda
+	\end{cases}$$
+	
+	Now we can conclude that :
+	
+	$$\theta_{n+1}=P_{\gamma_{n+1}} (\theta_n-\gamma_{n+1}\nabla f(\theta_n))$$
+	
 	
 	
 \end{document}
