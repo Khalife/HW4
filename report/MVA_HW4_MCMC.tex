@@ -89,7 +89,7 @@
 
 1. The equality is trivial: we just have to set $\vartheta=\theta$.\\
 
-To prove the equality $$ Q_{\gamma}(\vartheta,\theta)\geq (f+g)(\vartheta)$$, we just need to prove that:
+To prove the inequality $$ Q_{\gamma}(\vartheta,\theta)\geq (f+g)(\vartheta)$$ we just need to prove that:
 
 $$\forall \vartheta , \theta \in \Theta \quad f(\vartheta)\leq f(\theta)+<\nabla f(\theta),\vartheta-\theta>+\frac{1}{2\gamma}\vert\vert \vartheta-\theta\vert\vert^2$$
 
@@ -110,7 +110,7 @@ where $\vartheta_t=t \vartheta+(1-t)\theta$. Since, $\frac{d}{dt}\vartheta_t=\va
 \end{eqnarray*}
 
 The first inequality is the result of Cauchy-Schwartz inequality while the second one is due to the Lipschitz nature of the gradient. The third inequality comes from the fact that $0<\gamma\leq \frac{1}{L}$.\\
-This means that $F$ in decreasing in $[0,1]$, so:$F(0)\geq F(1)$:
+This means that $F$ in decreasing in $[0,1]$, so: $F(0)\geq F(1)$:
 $$F(0)=0$$
 and :
 $$F(1)=f(\vartheta)- f(\theta)-<\nabla f(\theta),\vartheta-\theta>-\frac{1}{2\gamma}\vert\vert \vartheta-\theta\vert\vert^2$$
