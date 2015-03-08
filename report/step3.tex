@@ -75,7 +75,7 @@ x_i\\ z_i'u
 $$\int H_{\theta}(u)\pi_{\theta}(u)du   \sim \frac{1}{K}\sum_{k=1}^{K} H_{\theta}(u^k) $$
 \begin{algorithm}
 	\caption{Algorithm to approximate $ \nabla l(\theta)$}\label{RS}
-	Sample a chain $(u^{(k)},w^{(k)})_{1\leq k \leq K}$ with algorithm 1.~\\
+	Sample a chain $(u^{(k)},w^{(k)})_{1\leq k \leq K}$ from distribution $\tilde{\pi}_{\theta}$ with algorithm 1.~\\
 	~\\
 	return $\frac{1}{K}\sum_{k=1}^{K} H_{\theta}(u^k)$
 \end{algorithm}~\\
