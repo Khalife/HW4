@@ -61,7 +61,7 @@ $$\boxed{\tilde{\pi}_{\theta}(w | u)= \prod_{i=1}^{N}\bar{\pi}(w_i ;|x_i'\beta +
 	$w_{i}^{(k+1)}$ drawn thanks to HW1Sampler(.,$|x_i'\beta + \sigma z_i' u^{(k+1)}|/2)$\\
 	-end for i~\\
 	end k~\\
-	return $(u^{(k)},w^{(k)}_{1\leq k \leq K}$
+	return $(u^{(k)},w^{(k)})_{1\leq k \leq K}$
 \end{algorithm}~\\
 ~\\
 Cf code for implementation.~\\
@@ -72,7 +72,7 @@ Let us denote $H_{\theta}(u)=\sum_{i=1}^{N}(Y_i-s(x_i'\beta+\sigma z_i'u)) \left
 x_i\\ z_i'u
 \end{smallmatrix}
 \right)$. Then, 
-$$\int H_{\theta}(u)\pi_{\theta}(u)du   \sim \frac{1}{K}\sum_{k=1}^{K} H_{\theta}(u^k) $$
+$$\nabla l(\theta) = \int \int H_{\theta}(u)\tilde{\pi}_{\theta}(u,w)dudw   \sim \frac{1}{K}\sum_{k=1}^{K} H_{\theta}(u^k) $$
 \begin{algorithm}
 	\caption{Algorithm to approximate $ \nabla l(\theta)$}\label{RS}
 	Sample a chain $(u^{(k)},w^{(k)})_{1\leq k \leq K}$ from distribution $\tilde{\pi}_{\theta}$ with algorithm 1.~\\
