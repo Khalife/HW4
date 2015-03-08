@@ -313,9 +313,9 @@
 		$$\forall x \in \mathbb{R}_+ \quad \frac{d}{dx}L^{\gamma}_u(x)=\lambda + \frac{1}{\gamma} (x-u)$$
 		Two cases present themselves:
 		\begin{itemize}
-			\item [1. ] Either $u-\gamma \lambda \geq 0 $ and then  $L^{\gamma}_u$ decreases in $ [0,u-\gamma \lambda]$ from $\frac{1}{2 \gamma}u^2$ to $\lambda u -\frac{\lambda^2 \gamma}{2} $ and then starts increasing in $[u-\gamma \lambda,+\infty)$ from $\lambda u -\frac{\lambda^2 \gamma}{2} $ to $+\infty$.
+			\item [(i). ] Either $u-\gamma \lambda \geq 0 $ and then  $L^{\gamma}_u$ decreases in $ [0,u-\gamma \lambda]$ from $\frac{1}{2 \gamma}u^2$ to $\lambda u -\frac{\lambda^2 \gamma}{2} $ and then starts increasing in $[u-\gamma \lambda,+\infty)$ from $\lambda u -\frac{\lambda^2 \gamma}{2} $ to $+\infty$.
 			
-			\item[2. ] Or $u-\gamma \lambda < 0 $, which means that $L^{\gamma}_u$ increases in $\mathbb{R}_+$ from $\frac{1}{2 \gamma}u^2$ to $+\infty$
+			\item[(ii). ] Or $u-\gamma \lambda < 0 $, which means that $L^{\gamma}_u$ increases in $\mathbb{R}_+$ from $\frac{1}{2 \gamma}u^2$ to $+\infty$
 		\end{itemize}
 	\end{itemize}
 	
@@ -332,6 +332,53 @@
 	
 	$$\theta_{n+1}=P_{\gamma_{n+1}} (\theta_n-\gamma_{n+1}\nabla f(\theta_n))$$
 	
+	\section*{Step 2}
+	~\\
 	
+	1. For $i=1,\dots,N$, we introduce: $\tilde{u}_i\triangleq x_i' \beta + \sigma z_i'U$
+	
+	\begin{eqnarray*}
+		\mathbb{P}(Y_i=y_i\vert \textbf{U})&=& s(\tilde{u}_i)^{y_i}(1-s(\tilde{u}_i))^{1-y_i}\\
+															&=& \frac{e^{\tilde{u}_i y_i}}{(1+e^{\tilde{u}_i})^{y_i}}\times \frac{1}{(1+e^{\tilde{u}_i})^{1-y_i}}\\
+															&=& \frac{e^{\tilde{u}_i y_i}}{(1+e^{\tilde{u}_i})}
+	\end{eqnarray*}
+	
+	This means that:
+	
+	\begin{eqnarray*}
+		\mathbb{P}((Y_1,\dots,Y_N)=(y_1,\dots,y_N)\vert \textbf{U})&=& \prod_{i=1,\dots,N}\frac{e^{\tilde{u}_i y_i}}{(1+e^{\tilde{u}_i})}\\
+												&=& \frac{\text{exp}(\sum_{i=1,\dots,N}\tilde{u}_i y_i)}{\prod_{i=1,\dots,N}(1+e^{\tilde{u}_i})}\\
+	\end{eqnarray*}
+	
+	\begin{eqnarray*}
+		\mathbb{P}((Y_1,\dots,Y_N)=(y_1,\dots,y_N))&=&\int_{\mathbb{R}}\mathbb{P}((Y_1,\dots,Y_N)=(y_1,\dots,y_N)\vert \textbf{U}=u) \phi(u) du\\
+												&=& \int_{\mathbb{R}} \frac{\exp(\sum_{i=1,\dots,N}\tilde{u}_i y_i)}{\prod_{i=1,\dots,N}(1+e^{\tilde{u}_i})} \phi(u) du
+	\end{eqnarray*}
+	
+	Now we can write that:
+	
+	$$l(\theta\vert Y_1,\dots,Y_N)=\log(\int_{\mathbb{R}} \frac{\exp(\sum_{i=1,\dots,N}(x_i' \beta + \sigma z_i'u) Y_i)}{\prod_{i=1,\dots,N}(1+\exp(x_i' \beta + \sigma z_i'u))} \phi(u) du)$$
+	
+	2.  We can derive inside the integral using the bounded convergence since the function is continous:
+	\begin{eqnarray*}
+		\nabla l(\theta)&=& \frac{1}{\int_{\mathbb{R}} \frac{\exp(\sum_{i=1,\dots,N}(x_i' \beta + \sigma z_i'u) Y_i)}{\prod_{i=1,\dots,N}(1+\exp(x_i' \beta + \sigma z_i'u))} \phi(u) du} \times \nabla \int_{\mathbb{R}} \frac{\exp(\sum_{i=1,\dots,N}(x_i' \beta + \sigma z_i'u) Y_i)}{\prod_{i=1,\dots,N}(1+\exp(x_i' \beta + \sigma z_i'u))} \phi(u) du)\\
+							&=& \frac{1}{\exp(l(\theta))}\times \nabla \int_{\mathbb{R}} \exp(\sum_{i=1,\dots,N}(x_i' \beta + \sigma z_i'u) Y_i-\log(1+\exp(x_i' \beta + \sigma z_i'u)))\phi(u)du \\
+							&=& \exp(-l(\theta)) \int_{\mathbb{R}} \nabla \exp(l_c(\theta\vert \textbf{u})) \phi(u) du\\
+							&=& \int_{\mathbb{R}} \nabla l_c(\theta\vert \textbf{u}) \exp (l_c(\theta\vert \textbf{u})-l(\theta)) \phi(u)du\\
+							&=& \int_{\mathbb{R}} \sum_{i=1}^{N} (Y_i\begin{bmatrix}
+								x_i\\
+								z_i'u
+							\end{bmatrix}-\frac{\exp(x_i' \beta + \sigma z_i'u)}{1+\exp(x_i' \beta + \sigma z_i'u)}\begin{bmatrix}
+							x_i\\
+							z_i'u
+						\end{bmatrix}) \exp (l_c(\theta\vert \textbf{u})-l(\theta)) \phi(u)du\\
+	\end{eqnarray*}
+	
+	\section*{Step 3}
+	
+	\section*{Step 4}
+	~\\
+	
+	1. 
 	
 \end{document}
