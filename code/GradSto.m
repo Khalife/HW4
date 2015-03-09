@@ -18,7 +18,7 @@ q = size(Z, 2);
 K_chaine = Nmax; %1000; %longueur chaine 
 w = ones(N, K_chaine);
 
-Hk = zeros( p+1 ,1 );
+Hk = zeros( p ,1 );
 
 for k = 2:K_chaine
     G=zeros(q);
