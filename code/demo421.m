@@ -64,7 +64,7 @@ for t = 1 : n
     % -- proximal operator: P --
     % min( -l(theta) + lambda |g|_1 : \nabla f(\theta_{n+1} = - gradL .
     
-    theta = P( theta + gamma*gradL(1:end-1), gamma,lambda );
+    theta = P( theta + gamma*gradL, gamma,lambda );
     beta = theta ; % In 4.2, sigma is known
 end
 
@@ -77,9 +77,10 @@ plot( beta , 'ro-');
 pause(.01);
 end
 
-saveas(1, '421-ERR.jpg');
-saveas(2, '421-SEN.jpg');
-saveas(3, '421-PRE.jpg');
-saveas(4, '421-betaBETA.jpg');
+savestep4 = 'step4/figures/';
+saveas(1, [savestep4,'421-ERRnew.jpg'] );
+saveas(2, [savestep4,'421-SENnew.jpg'] );
+saveas(3, [savestep4,'421-PREnew.jpg'] );
+saveas(2, [savestep4,'421-betaBETAnew.jpg'] );
 
 

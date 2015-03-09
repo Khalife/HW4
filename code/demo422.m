@@ -65,7 +65,7 @@ for i = 1 : length( lambdas )
         % -- proximal operator: P --
         % min( -l(theta) + lambda |g|_1 : \nabla f(\theta_{n+1} = - gradL .
         
-        theta = P( theta + gamma(t)*gradL(1:end-1), gamma(t),lambda );
+        theta = P( theta + gamma(t)*gradL, gamma(t),lambda );
         beta = theta ;
     end
     
@@ -78,9 +78,9 @@ for i = 1 : length( lambdas )
     pause(.01);
 end
 
-saveas(1, '422-ERR.jpg');
-saveas(2, '422-SEN.jpg');
-saveas(3, '422-PRE.jpg');
-saveas(4, '422-betaBETA.jpg');
-
+savestep4 = 'step4/figures/';
+saveas(1, [savestep4,'422-ERRnew.jpg'] );
+saveas(2, [savestep4,'422-SENnew.jpg'] );
+saveas(3, [savestep4,'422-PREnew.jpg'] );
+saveas(2, [savestep4,'422-betaBETAnew.jpg'] );
 

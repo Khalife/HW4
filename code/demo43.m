@@ -76,10 +76,10 @@ figure(); plot(BETA, '*-'); hold on;
 plot( beta , 'ro-');
 pause(.01);
 end
-
-saveas(1, '43-ERRnew.jpg');
-saveas(2, '43-SENnew.jpg');
-saveas(3, '43-PREnew.jpg');
-saveas(4, '43-betaBETAnew.jpg');
+savestep4 = 'step4/figures/';
+saveas(1, [savestep4,'43-ERRnew.jpg'] );
+saveas(2, [savestep4,'43-SENnew.jpg'] );
+saveas(3, [savestep4,'43-PREnew.jpg'] );
+saveas(2, [savestep4,'43-betaBETAnew.jpg'] );
 
 

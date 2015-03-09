@@ -36,9 +36,9 @@ for k = 2:K_chaine
     end
     disp(k);
 % calculate H(uk) = sum_i auxv_i (x_i ; z'*u)
-tmp = [X'; (Z*u)']; 
+tmp = X'; 
 auxk = auxv( X,Y,Z, u );
-tmp = repmat( auxk', p+1,1).*tmp;
+tmp = repmat( auxk', p,1).*tmp;
 
 Hk = Hk + sum( tmp, 2 );
 
