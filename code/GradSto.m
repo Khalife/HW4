@@ -29,12 +29,12 @@ for k = 2:K_chaine
     end    
     Gamma = inv(eye(q)+sigma^2*G);
     mu = sigma*Gamma*m;
-    u = mvnrnd(mu,Gamma);
+    u = mvnrnd(mu,Gamma)';
     
     for i = 1:N
         w(i,k) = 4*HomeWork1( 0.5*abs(dot(X(i,:),beta)+sigma*dot(Z(i,:),u )));
     end
-%     disp(k);
+    disp(k);
 % calculate H(uk) = sum_i auxv_i (x_i ; z'*u)
 tmp = [X'; (Z*u)']; 
 auxk = auxv( X,Y,Z, u );

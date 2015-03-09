@@ -1,7 +1,11 @@
 
 %%  4.2 - Strategie 2 - Algo (5) - \nabla f(\theta_n) using <GradSto>
 %
-addpath( './step3/hw1');
+close all;
+clearvars except N;
+if ~ exist('N','var')
+    addpath( './step3/hw1');
+end
 N = 500;
 p = 1000;
 q = 5;
@@ -45,32 +49,33 @@ SEN = zeros(1,n);
 PRE = zeros(1,n);
 
 for i = 1 : length( lambdas )
-lambda = lambdas(i);
-
-%% GradSto : sample \nabla l(\theta)
-
-for t = 1 : n
-    disp(t);
-    Hnew = GradSto(Nm(t), theta, Z, X, Y, opt);
+    lambda = lambdas(i);
     
-    % -- compute ERR, SEN and PRE (n, beta, BETA) ---
-    ERR(t) = norm( beta - BETA) / norm(BETA);
-    SEN(t) = sen( beta );
-    PRE(t) = pre( beta );
-    % -- proximal operator: P --
-    % min( -l(theta) + lambda |g|_1 : \nabla f(\theta_{n+1} = - Hnew .
+    %% GradSto : sample \nabla l(\theta)
     
-    theta = P( theta + gamma(t)*Hnew, gamma(t),lambda );
-    beta = theta ;
-end
-
-figure(); plot(ERR);
-figure(); plot(SEN);
-figure(); plot(PRE);
-
-figure(); plot(BETA, '*-'); hold on;
-plot( beta , 'ro-');
-pause(.01);
+    for t = 1 : n
+        disp( ['algo5 iteration: t = ',int2str(t)] );
+        
+        Hnew = GradSto(Nm(t), theta, Z, X, Y, opt);
+        
+        % -- compute ERR, SEN and PRE (n, beta, BETA) ---
+        ERR(t) = norm( beta - BETA) / norm(BETA);
+        SEN(t) = sen( beta );
+        PRE(t) = pre( beta );
+        % -- proximal operator: P --
+        % min( -l(theta) + lambda |g|_1 : \nabla f(\theta_{n+1} = - Hnew .
+        
+        theta = P( theta + gamma(t)*Hnew(1:end-1), gamma(t),lambda );
+        beta = theta ;
+    end
+    
+    figure(); plot(ERR);
+    figure(); plot(SEN);
+    figure(); plot(PRE);
+    
+    figure(); plot(BETA, '*-'); hold on;
+    plot( beta , 'ro-');
+    pause(.01);
 end
 
 
