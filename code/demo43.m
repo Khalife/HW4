@@ -61,7 +61,7 @@ for t = 1 : n
     disp( ['algo5 iteration: t = ',int2str(t)] );
 %     gradL = GradSto43(Nm(t), theta, Z, X, Y );
       [w, u ] = GibbsHomework3(Nm(t), theta, Z, X, Y, opt);
-      gradL = GradSto(w,u, theta, Z, X, Y, opt);
+      gradL = GradSto43(w,u, theta, Z, X, Y, opt);
 
     % -- compute ERR, SEN and PRE (n, beta, BETA) ---
     ERR(t) = norm( beta - BETA) / norm(BETA);
