@@ -25,7 +25,7 @@ for k = 2:K_chaine
     m=zeros(q,1);
     for j=1:N
         G=G+w(j,k-1)*transpose(Z(j,:))*Z(j,:);
-        m=m+((Y(j)-1/2)-w(j,k-1)* dot(X(j,:),beta) *transpose(Z(j,:)));
+        m=m+((Y(j)-1/2)-w(j,k-1)* dot(X(j,:),beta)) *transpose(Z(j,:));
     end    
     Gamma = inv(eye(q)+sigma^2*G);
     mu = sigma*Gamma*m;
