@@ -55,16 +55,16 @@ lambda = lambdas(i);
 
 for t = 1 : n
     disp( ['algo5 iteration: t = ',int2str(t)] );
-    Hnew = GradSto(Nm(t), theta, Z, X, Y, opt);
+    gradL = GradSto(Nm(t), theta, Z, X, Y, opt);
     
     % -- compute ERR, SEN and PRE (n, beta, BETA) ---
     ERR(t) = norm( beta - BETA) / norm(BETA);
     SEN(t) = sen( beta );
     PRE(t) = pre( beta );
     % -- proximal operator: P --
-    % min( -l(theta) + lambda |g|_1 : \nabla f(\theta_{n+1} = - Hnew .
+    % min( -l(theta) + lambda |g|_1 : \nabla f(\theta_{n+1} = - gradL .
     
-    theta = P( theta + gamma*Hnew(1:end-1), gamma,lambda );
+    theta = P( theta + gamma*gradL(1:end-1), gamma,lambda );
     beta = theta ; % In 4.2, sigma is known
 end
 
