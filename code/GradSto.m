@@ -1,7 +1,6 @@
 
 function  gradL = GradSto(w,u, theta, Z, X, Y, opt)
 
-% stop = 0;
 sigma = opt.SIGMA;
 beta = theta;
 

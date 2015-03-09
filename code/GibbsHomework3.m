@@ -2,8 +2,14 @@
 function  [w, u] = GibbsHomework3(Nmax, theta, Z, X, Y, opt)
 
 % stop = 0;
+if opt.sigmaknown
 sigma = opt.SIGMA;
 beta = theta;
+else
+    sigma = theta(end);
+    beta = theta(1:end-1);
+end
+    
 
 % s = @(x) exp(x)./(1+exp(x));
 % auxv = @( X,Y, Z, u ) Y - s(X*beta + sigma*Z*u);

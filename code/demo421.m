@@ -34,6 +34,7 @@ beta(nnzeroindx) = nnzeroentr;
 % theta_0: IN 4.2 sigma is assumed to be known
 % theta = [beta; sigma];
 theta = beta;
+opt.sigmaknown = 1;
 %% hyperparameters
 % iterations for algo (5)
 n = 20;
@@ -49,6 +50,7 @@ SEN = zeros(1,n);
 PRE = zeros(1,n);
 s = @(x) exp(x)./(1+exp(x));
 opt.s = s;
+
 for i = 1 : length( lambdas )
 lambda = lambdas(i);
 

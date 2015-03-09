@@ -34,6 +34,7 @@ beta(nnzeroindx) = nnzeroentr;
 % theta_0: IN 4.2 sigma is assumed to be known
 % theta = [beta; sigma];
 theta = beta;
+opt.sigmaknown = 1;
 %% hyperparameters
 % iterations for algo (5)
 n = 20;
@@ -48,6 +49,9 @@ ERR = zeros(1,n);
 SEN = zeros(1,n);
 PRE = zeros(1,n);
 
+s = @(x) exp(x)./(1+exp(x));
+opt.s = s;
+
 for i = 1 : length( lambdas )
     lambda = lambdas(i);
     
@@ -56,8 +60,10 @@ for i = 1 : length( lambdas )
     for t = 1 : n
         disp( ['algo5 iteration: t = ',int2str(t)] );
         
-        gradL = GradSto(Nm(t), theta, Z, X, Y, opt);
-        
+%         gradL = GradSto(Nm(t), theta, Z, X, Y, opt);
+            [w, u ] = GibbsHomework3(Nm(t), theta, Z, X, Y, opt);
+            gradL = GradSto(w,u, theta, Z, X, Y, opt);
+
         % -- compute ERR, SEN and PRE (n, beta, BETA) ---
         ERR(t) = norm( beta - BETA) / norm(BETA);
         SEN(t) = sen( beta );
