@@ -36,7 +36,7 @@ beta(nnzeroindx) = nnzeroentr;
 theta = beta;
 %% hyperparameters
 % iterations for algo (5)
-n = 20;
+n = 60;
 
 gamma = 0.005;
 Nm = 150 + (1:n) ; % may lift to 200+ later...
@@ -81,6 +81,6 @@ savestep4 = 'step4/figures/';
 saveas(1, [savestep4,'421-ERRnew.jpg'] );
 saveas(2, [savestep4,'421-SENnew.jpg'] );
 saveas(3, [savestep4,'421-PREnew.jpg'] );
-saveas(2, [savestep4,'421-betaBETAnew.jpg'] );
+saveas(4, [savestep4,'421-betaBETAnew.jpg'] );
 
 
