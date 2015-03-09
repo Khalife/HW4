@@ -36,7 +36,7 @@ beta(nnzeroindx) = nnzeroentr;
 theta = beta;
 %% hyperparameters
 % iterations for algo (5)
-n = 60;
+n = 20;
 
 gamma = 0.005;
 Nm = 150 + (1:n) ; % may lift to 200+ later...
@@ -47,7 +47,8 @@ pre = @( b ) sum( (b~=0).* Bnz ) /sum( (b~=0) );
 ERR = zeros(1,n);
 SEN = zeros(1,n);
 PRE = zeros(1,n);
-
+s = @(x) exp(x)./(1+exp(x));
+opt.s = s;
 for i = 1 : length( lambdas )
 lambda = lambdas(i);
 
@@ -55,8 +56,12 @@ lambda = lambdas(i);
 
 for t = 1 : n
     disp( ['algo5 iteration: t = ',int2str(t)] );
-    gradL = GradSto(Nm(t), theta, Z, X, Y, opt);
-    
+%     gradL  = GradSto(Nm(t), theta, Z, X, Y, opt);
+    [w, u ] = GibbsHomework3(Nm(t), theta, Z, X, Y, opt);
+    gradL = GradSto(w,u, theta, Z, X, Y, opt);
+%     if stop
+%         break;
+%     end
     % -- compute ERR, SEN and PRE (n, beta, BETA) ---
     ERR(t) = norm( beta - BETA) / norm(BETA);
     SEN(t) = sen( beta );
