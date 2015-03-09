@@ -39,7 +39,9 @@ beta = theta(1:end-1);
 ERR(n) = norm( beta - BETA) / norm(BETA);
 
 % -- proximal operator: P --
- theta = P( theta-gamma*Hnew, gamma,lambda );
+% min( -l(theta) + lambda |g|_1 : \nabla f(\theta_{n+1} = - Hnew .
+
+ theta = P( theta + gamma*Hnew, gamma,lambda );
 
 end
 
