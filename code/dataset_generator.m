@@ -22,7 +22,7 @@ function [Y, X, Z, beta] = dataset_generator(N,p,q ,opt)
     if nargin < 4
     sigma = sqrt( .1 );
     else
-        sigma = opt.sigma;
+        sigma = opt.SIGMA;
     end
     %% The loading vector
     
